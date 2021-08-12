@@ -1,0 +1,15 @@
+# ビルド環境
+FROM node:lts-alpine as build-stage
+
+WORKDIR /app
+
+COPY package*.json ./
+
+# npmモジュールのインストール
+RUN npm install
+
+# Dockerコンテナの中（/appディレクトリ）に、
+# srcディレクトリのリソースをコピー
+COPY . .
+
+CMD ["npm", "run", "serve"]

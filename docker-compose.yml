@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  vue-app:
+    container_name: vue-todo-list
+    build: ./vue-todo-list # Dockerfileの場所
+    ports:
+      - 4000:3000
+    volumes:
+      - ./vue-todo-list:/app
+    tty: true
