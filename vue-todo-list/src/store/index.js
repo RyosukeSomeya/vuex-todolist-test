@@ -1,11 +1,17 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import actions from './actions';
+import getters from './getters';
+import mutations from './mutations';
 
-Vue.user(Vuex);
+Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        showState: 'all',
+        showStatus: 'all',
         todos: [],
-    }
+    },
+    getters,
+    mutations,
+    actions,
 })

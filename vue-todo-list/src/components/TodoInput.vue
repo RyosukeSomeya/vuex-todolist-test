@@ -1,7 +1,7 @@
 <template>
   <div class="add-task">
     <h1>新規タスクの追加</h1>
-    <input type="text" v-model="inputValue">
+    <input type="text" v-model="inputValue" />
     <button @click="sendNewTodo">追加</button>
   </div>
 </template>
@@ -10,16 +10,16 @@
 export default {
   data() {
     return {
-      inputValue: ''
-    }
+      inputValue: "",
+    };
   },
   methods: {
     sendNewTodo() {
-        this.$emit('sendNewTodo', this.inputValue);
-        this.inputValue = '';
+      this.$store.dispatch("addTodo", this.inputValue);
+      this.inputValue = "";
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
