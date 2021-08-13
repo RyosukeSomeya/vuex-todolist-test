@@ -1,15 +1,9 @@
 export default {
     getTodoList: (state) => {
         if (state.showStatus === 'done') {
-            const filtered = state.todos.filter((todo) => {
-                return todo.status === 'done';
-            });
-            return filtered;
+            return state.todos.filter((todo) => todo.status === 'done');
         } else if (state.showStatus === 'wip') {
-            const filtered = state.todos.filter((todo) => {
-                return todo.status === 'wip';
-            });
-            return filtered
+            return state.todos.filter((todo) => todo.status === 'wip');
         } else {
             return state.todos;
         }
