@@ -1,4 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
+import Vuex from "vuex"
+
 import TodoFilter from '@/components/TodoFilter';
 
 describe('Testing TodoFilter component', () => {

@@ -1,4 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
+import Vuex from "vuex"
+
 import TodoInput from '@/components/TodoInput';
 
 describe('Testing TodoInput component', () => {
@@ -33,7 +35,7 @@ describe('Testing TodoInput component', () => {
             expect(wrapper.find('input[type="text"]').element.value).toBe('追加タスク1');
         });
 
-        it ('追加ボタンクリックでイベントが発火する', () => {
+        it('追加ボタンクリックでイベントが発火する', () => {
             // Todo追加ボタンの発火テスト
             wrapper.find('button').trigger('click');
             expect(wrapper.emitted('sendNewTodo')).toBeTruthy();
