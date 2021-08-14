@@ -1,13 +1,26 @@
-import { shallowMount } from '@vue/test-utils';
-import Vuex from "vuex"
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import TodoInput from '@/components/TodoInput';
+import Vuex from "vuex";
 
-describe('Testing TodoInput component', () => {
+const localVue = createLocalVue();
+localVue.use(Vuex);
+
+describe('TodoInputコンポーネント テスト', () => {
+    let store;
+    let actions;
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallowMount(TodoInput);
+        // Vuexストアのモック作成
+        // TodoDisplayコンポーネントで仕様するaction
+        actions = {
+            addTodo: jest.fn(),
+        }
+        store = new Vuex.Store({
+            actions,
+        })
+
+        wrapper = shallowMount(TodoInput, { store, localVue });
     });
 
     afterEach(() => {
@@ -35,10 +48,10 @@ describe('Testing TodoInput component', () => {
             expect(wrapper.find('input[type="text"]').element.value).toBe('追加タスク1');
         });
 
-        it('追加ボタンクリックでイベントが発火する', () => {
+        it('追加ボタンクリックで"addTodo"が呼ばれる', () => {
             // Todo追加ボタンの発火テスト
             wrapper.find('button').trigger('click');
-            expect(wrapper.emitted('sendNewTodo')).toBeTruthy();
+            expect(actions.addTodo).toHaveBeenCalled();
         });
     });
 });

@@ -1,13 +1,26 @@
-import { shallowMount } from '@vue/test-utils';
-import Vuex from "vuex"
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import TodoFilter from '@/components/TodoFilter';
+import Vuex from "vuex";
 
-describe('Testing TodoFilter component', () => {
+const localVue = createLocalVue();
+localVue.use(Vuex);
+
+describe('TodoFilterコンポーネント テスト', () => {
+    let store;
+    let actions;
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallowMount(TodoFilter)
+        // Vuexストアのモック作成
+        // TodoDisplayコンポーネントで仕様するaction
+        actions = {
+            selectStatus: jest.fn(),
+        }
+        store = new Vuex.Store({
+            actions,
+        })
+
+        wrapper = shallowMount(TodoFilter, { store, localVue });
     });
 
     afterEach(() => {
@@ -35,32 +48,36 @@ describe('Testing TodoFilter component', () => {
             expect(radioInput.length).toBe(3);
         })
 
-        it('「すべて」が選択されている', async () => {
-            // 初期値でセットされてしまっているので、changeで発火させる
+        it('「すべて」が選択時、"selectStatus"が呼ばれる', async () => {
             await radioInput.at(0).trigger('change');
+            expect(actions.selectStatus).toHaveBeenCalled();
+            // 表示状態確認
             expect(radioInput.at(0).element.checked).toBe(true);
             expect(radioInput.at(1).element.checked).toBe(false);
             expect(radioInput.at(2).element.checked).toBe(false);
             expect(radioInput.at(0).element.value).toBe('all');
-            expect(wrapper.emitted('selectState')[0]).toEqual(['all']);
         });
 
-        it('「作業中」が選択されている', async () => {
-            await radioInput.at(1).setChecked();
+        it('「作業中」が選択時、"selectStatus"が呼ばれる', async () => {
+            await radioInput.at(1).trigger('change');
+            expect(actions.selectStatus).toHaveBeenCalled();
+            // 表示状態確認
             expect(radioInput.at(0).element.checked).toBe(false);
             expect(radioInput.at(1).element.checked).toBe(true);
             expect(radioInput.at(2).element.checked).toBe(false);
             expect(radioInput.at(1).element.value).toBe('wip');
-            expect(wrapper.emitted('selectState')[0]).toEqual(['wip']);
         });
 
-        it('「完了」が選択されている', async () => {
-            await radioInput.at(2).setChecked();
+
+
+        it('「完了」が選択時、"selectStatus"が呼ばれる', async () => {
+            await radioInput.at(2).trigger('change');
+            expect(actions.selectStatus).toHaveBeenCalled();
+            // 表示状態確認
             expect(radioInput.at(0).element.checked).toBe(false);
             expect(radioInput.at(1).element.checked).toBe(false);
             expect(radioInput.at(2).element.checked).toBe(true);
             expect(radioInput.at(2).element.value).toBe('done');
-            expect(wrapper.emitted('selectState')[0]).toEqual(['done']);
         });
     });
 });

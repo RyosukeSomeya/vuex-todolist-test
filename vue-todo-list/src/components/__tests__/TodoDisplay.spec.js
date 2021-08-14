@@ -1,7 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import TodoDisplay from '@/components/TodoDisplay';
 import Vuex from "vuex";
-import getters from '../../store/getters'
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
