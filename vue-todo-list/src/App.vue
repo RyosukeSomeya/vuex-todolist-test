@@ -1,61 +1,51 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="./assets/logo.png" />
     <div class="container">
       <h1>TodoList</h1>
-      <TodoFilter @selectState="changeShowState"/>
+      <TodoFilter />
       <div class="todo-list">
-        <TodoDisplay
-          v-bind="{todos, showState}"
-          @deleteTodoIndex="deleteTodo"
-          @changeStateIndex="changeState"
-        />
-        <TodoInput @sendNewTodo="addTodo" />
+        <TodoDisplay />
+        <TodoInput />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import TodoFilter from './components/TodoFilter';
-import TodoDisplay from './components/TodoDisplay';
-import TodoInput from './components/TodoInput';
+import TodoFilter from "./components/TodoFilter";
+import TodoDisplay from "./components/TodoDisplay";
+import TodoInput from "./components/TodoInput";
 
 export default {
-  data() {
-    return {
-      showState: 'all',
-      todos: [],
-    }
-  },
-  name: 'App',
+  name: "App",
   components: {
     TodoFilter,
     TodoDisplay,
-    TodoInput
+    TodoInput,
   },
-  methods: {
-    addTodo(inputValue) {
-        this.todos.push({
-            comment: inputValue,
-            state: 'wip'
-        });
-    },
-    changeShowState(selectState) {
-      this.showState = selectState;
-    },
-    deleteTodo(index) {
-      this.todos.splice(index, 1);
-    },
-    changeState(index) {
-        if (this.todos[index].state === 'wip') {
-            this.todos[index].state = 'done'
-        } else {
-            this.todos[index].state = 'wip'
-        }
-    }
-  }
-}
+  // methods: {
+  //   addTodo(inputValue) {
+  //     this.todos.push({
+  //       comment: inputValue,
+  //       state: "wip",
+  //     });
+  //   },
+  //   changeShowState(selectState) {
+  //     this.showState = selectState;
+  //   },
+  //   deleteTodo(index) {
+  //     this.todos.splice(index, 1);
+  //   },
+  //   changeState(index) {
+  //     if (this.todos[index].state === "wip") {
+  //       this.todos[index].state = "done";
+  //     } else {
+  //       this.todos[index].state = "wip";
+  //     }
+  //   },
+  // },
+};
 </script>
 
 <style>
