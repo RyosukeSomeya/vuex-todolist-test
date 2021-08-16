@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import TodoDisplay from '@/components/TodoDisplay';
-import Vuex from "vuex";
+import Vuex from 'vuex';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -86,5 +86,4 @@ describe('TodoDisplayコンポーネント テスト', () => {
             expect(actions.deleteTodo).toHaveBeenCalled()
         });
     });
-
 });

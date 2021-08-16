@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import TodoInput from '@/components/TodoInput';
-import Vuex from "vuex";
+import Vuex from 'vuex';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
