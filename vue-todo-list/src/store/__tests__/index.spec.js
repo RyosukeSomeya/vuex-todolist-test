@@ -37,13 +37,13 @@ describe('store action test', () => {
     it('dispatch addTodo', () => {
         // 初期状態
         expect(store.state.todos).toEqual([]);
-        store.dispatch('addTodo', "newTodo1");
+        store.dispatch('addTodo', 'newTodo1');
         // 追加1
         expect(store.state.todos).toEqual([
             { comment: 'newTodo1', status: 'wip' }
         ]);
         // 追加2
-        store.dispatch('addTodo', "newTodo2");
+        store.dispatch('addTodo', 'newTodo2');
         expect(store.state.todos).toEqual([
             { comment: 'newTodo1', status: 'wip' },
             { comment: 'newTodo2', status: 'wip' },
@@ -52,7 +52,7 @@ describe('store action test', () => {
     });
 
     it('dispatch changeTodoStatus', () => {
-        store.dispatch('addTodo', "newTodo1");
+        store.dispatch('addTodo', 'newTodo1');
         store.dispatch('changeTodoStatus', 0);
         // 状態変更
         expect(store.state.todos).toEqual([
@@ -67,8 +67,8 @@ describe('store action test', () => {
     });
 
     it('dispatch deleteTodo', () => {
-        store.dispatch('addTodo', "newTodo1");
-        store.dispatch('addTodo', "newTodo2");
+        store.dispatch('addTodo', 'newTodo1');
+        store.dispatch('addTodo', 'newTodo2');
         store.dispatch('deleteTodo', 0);
         // 削除確認
         expect(store.state.todos).toEqual([
@@ -80,13 +80,13 @@ describe('store action test', () => {
         // 初期状態
         expect(store.state.showStatus).toEqual('all');
         //「作業中」選択
-        store.dispatch('selectStatus', "wip");
+        store.dispatch('selectStatus', 'wip');
         expect(store.state.showStatus).toEqual('wip');
         //「完了」選択
-        store.dispatch('selectStatus', "done");
+        store.dispatch('selectStatus', 'done');
         expect(store.state.showStatus).toEqual('done');
         //「すべて」選択
-        store.dispatch('selectStatus', "all");
+        store.dispatch('selectStatus', 'all');
         expect(store.state.showStatus).toEqual('all');
     });
 });
@@ -103,13 +103,13 @@ describe('store getter test', () => {
     });
 
     it('test getTodoList', () => {
-        store.dispatch('addTodo', "newTodo1");
-        store.dispatch('addTodo', "newTodo2");
+        store.dispatch('addTodo', 'newTodo1');
+        store.dispatch('addTodo', 'newTodo2');
 
         const actual = getters.getTodoList(store.state);
         expect(actual).toEqual([
-            { comment: "newTodo1", status: 'wip' },
-            { comment: "newTodo2", status: 'wip' }
+            { comment: 'newTodo1', status: 'wip' },
+            { comment: 'newTodo2', status: 'wip' }
         ])
     });
 });
