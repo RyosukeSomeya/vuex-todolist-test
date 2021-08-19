@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import Vuex from 'vuex' // ★追加
-Vue.use(Vuex) // ★追加
+import Vuex from 'vuex';
+Vue.use(Vuex);
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
