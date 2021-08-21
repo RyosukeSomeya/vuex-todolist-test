@@ -7,7 +7,6 @@ import mutations from "../store/mutations";
 export default {
     title: 'TodoFilter',
     component: TodoFilter,
-    argTypes: { change: { action: 'onChange' } },
 }
 
 const Template = () => ({
@@ -20,4 +19,3 @@ const Template = () => ({
 });
 
 export const SelectTodo = Template.bind({});
-
