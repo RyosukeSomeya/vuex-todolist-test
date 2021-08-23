@@ -1,33 +1,15 @@
 <template>
   <div class="select-state">
     <label for="all">
-      <input
-        type="radio"
-        id="all"
-        value="all"
-        v-model="selectState"
-        v-on:change="onChange"
-      />
+      <input type="radio" id="all" value="all" v-model="selectedState" />
       すべて
     </label>
     <label for="wip">
-      <input
-        type="radio"
-        id="wip"
-        value="wip"
-        v-model="selectState"
-        v-on:change="onChange"
-      />
+      <input type="radio" id="wip" value="wip" v-model="selectedState" />
       作業中
     </label>
     <label for="done">
-      <input
-        type="radio"
-        id="done"
-        value="done"
-        v-model="selectState"
-        v-on:change="onChange"
-      />
+      <input type="radio" id="done" value="done" v-model="selectedState" />
       完了
     </label>
   </div>
@@ -37,12 +19,18 @@
 export default {
   data() {
     return {
-      selectState: "all",
+      todoState: "all",
     };
   },
-  methods: {
-    onChange(event) {
-      this.$store.dispatch("selectStatus", event.target.value);
+  computed: {
+    selectedState: {
+      get() {
+        return this.todoState;
+      },
+      set(value) {
+        this.todoState = value;
+        this.$store.dispatch("selectStatus", value);
+      },
     },
   },
 };

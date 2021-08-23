@@ -3,9 +3,22 @@ version: '3.8'
 services:
   vue-app:
     container_name: vue-todo-list
-    build: ./vue-todo-list # Dockerfileの場所
+    build:
+      context: ./vue-todo-list/dockerfile/
+      dockerfile: Dockerfile_app
     ports:
       - 4000:3000
     volumes:
       - ./vue-todo-list:/app
     tty: true
+
+  storybook:
+    container_name: storybook
+    build:
+      context: ./vue-todo-list/dockerfile/
+      dockerfile: Dockerfile_storybook
+    ports:
+      - 5000:6006
+    volumes:
+      - ./vue-todo-list/node_modules:/app/node_modules
+      - ./vue-todo-list:/app
