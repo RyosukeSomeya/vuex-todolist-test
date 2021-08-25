@@ -1,6 +1,7 @@
 version: 2.1
 jobs:
   build:
+    working_directory: ~/app
     docker:
       - image: circleci/node:12
     steps:
@@ -9,6 +10,7 @@ jobs:
           name: install dependencies
           command: npm install
   test:
+    working_directory: ~/app
     docker:
       - image: circleci/node:12
     steps:
