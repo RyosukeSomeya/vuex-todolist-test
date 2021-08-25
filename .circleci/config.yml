@@ -36,7 +36,7 @@ workflows:
                 - develop
       - test:
           requires:
-            - build
+            - setup
           filters:
             branches:
               only: develop
