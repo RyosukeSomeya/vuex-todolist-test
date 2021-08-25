@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/vue-todo-list
+    working_directory: ~/app
     docker:
       - image: circleci/node:12
     steps:
@@ -9,20 +9,20 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            cd vue-todo-list
             npm install
-            npm build
+            npm run build
   test:
-    working_directory: ~/vue-todo-list
+    working_directory: ~/app
     docker:
       - image: circleci/node:12
     steps:
       - checkout
       - run:
-          name: install dependencies
-          command: npm install
-      - run:
           name: unit test
-          command: npm run test
+          command: |
+            cd vue-todo-list
+            npm run test
 
 workflows:
   version: 2
